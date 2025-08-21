@@ -2,7 +2,7 @@
 
 # Tracker 2
 
-Integrantes:
+Integrantes:;
 Marlon Daniel Ramirez Cruz
 Heiner Esteban Rivera Viquez
 Gabriel Ignacio Miranda Lopez
