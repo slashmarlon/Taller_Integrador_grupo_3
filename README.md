@@ -3,8 +3,8 @@
 # Tracker 2
 
 ## Integrantes:
-Marlon Daniel Ramirez Cruz\
-Heiner Esteban Rivera Viquez\
+Marlon Daniel Ramírez Cruz\
+Heiner Esteban Rivera Víquez\
 Gabriel Ignacio Miranda Lopez
 
 ## Resumen
