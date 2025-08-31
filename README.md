@@ -19,3 +19,5 @@ Gabriel Ignacio Miranda Lopez
 
 
 ## Diagrama de primer nivel:
+
+<img width="1222" height="273" alt="image" src="https://github.com/user-attachments/assets/7b5fdaaa-5dd2-4227-8c7f-71955ac1f349" />
