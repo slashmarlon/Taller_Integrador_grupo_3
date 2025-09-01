@@ -9,7 +9,9 @@ Gabriel Ignacio Miranda Lopez
 
 ## Resumen
 
-El presente proyecto propone el diseño e implementación de un sistema de monitoreo remoto para peceras domésticas, orientado a garantizar la adecuada calidad del agua y prevenir condiciones adversas que afecten la salud de sus peces. El sistema integra sensores de temperatura, pH y nivel de agua, conectados a un microcontrolador con módulo LoRa, encargado de adquirir, procesar y empaquetar los datos en formato APRS. Posteriormente, la información es transmitida mediante tecnología LoRa, que ofrece bajo consumo energético y gran alcance en la comunicación inalámbrica.
+El presente proyecto propone el diseño e implementación de un sistema de monitoreo remoto para peceras domésticas, orientado a garantizar la adecuada calidad del agua y prevenir condiciones adversas que afecten la salud de sus peces. 
+El sistema integra sensores de temperatura, pH y nivel de agua, conectados a un microcontrolador con módulo LoRa, encargado de adquirir, procesar y empaquetar los datos en formato APRS. 
+Posteriormente, la información es transmitida mediante tecnología LoRa, que ofrece bajo consumo energético y gran alcance en la comunicación inalámbrica.
 
 ## Objetivo general:
 1. Diseñar e implementar un sistema de monitoreo remoto para peceras domésticas que integre sensores de temperatura, pH y nivel de agua, con comunicación de datos mediante protocolo LoRa-APRS.
