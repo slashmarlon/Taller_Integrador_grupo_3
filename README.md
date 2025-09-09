@@ -21,6 +21,10 @@ El presente proyecto propone el diseño e implementación de un sistema de monit
 
 ## Componentes
 
+- ESP32-LoRa.
+- Sensores: Temperatura, pH y nivel del agua.
+- Sistema de alimentacion: Bateria recargable y/o panel solar.
+- Carcasa: Proteccion para interiores (impermeable).
 
 ## Diagrama de primer nivel
 
