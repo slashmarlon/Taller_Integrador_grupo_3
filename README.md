@@ -33,3 +33,4 @@ El presente proyecto propone el diseño e implementación de un sistema de monit
 ## Firmware
 
 El codigo base de control del tracker es el firmware libre establecido por Ricardo Guzman (richonguzman) en [Aqui](https://github.com/richonguzman/LoRa_APRS_Tracker/tree/main).
+
