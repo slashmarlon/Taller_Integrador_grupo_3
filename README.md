@@ -21,10 +21,12 @@ El presente proyecto propone el diseño e implementación de un sistema de monit
 
 ## Componentes
 
-- ESP32-LoRa.
-- Sensores: Temperatura, pH y nivel del agua.
+- ESP32 TTGO T-Beam V1.2.
+- Sensor de temperatura digital tipo tubular DS18B20.
+- Sensor de nivel de agua MH analógico.
+- Sensor de pH analógico.
 - Sistema de alimentacion: Bateria recargable y/o panel solar.
-- Carcasa: Proteccion para agua y caidas.
+- Carcasa: Proteccion para agua y caídas.
 
 ## Diagrama de primer nivel
 
