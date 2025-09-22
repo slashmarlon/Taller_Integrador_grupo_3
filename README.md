@@ -24,7 +24,7 @@ El presente proyecto propone el diseño e implementación de un sistema de monit
 - ESP32-LoRa.
 - Sensores: Temperatura, pH y nivel del agua.
 - Sistema de alimentacion: Bateria recargable y/o panel solar.
-- Carcasa: Proteccion para interiores (impermeable).
+- Carcasa: Proteccion para agua y caidas.
 
 ## Diagrama de primer nivel
 
@@ -32,5 +32,7 @@ El presente proyecto propone el diseño e implementación de un sistema de monit
 
 ## Firmware
 
-El codigo base de control del tracker es el firmware libre establecido por Ricardo Guzman (richonguzman) [Aqui](https://github.com/richonguzman/LoRa_APRS_Tracker/tree/main).
+El código base de control del tracker es el firmware libre establecido por Ricardo Guzman (richonguzman) [Aqui](https://github.com/richonguzman/LoRa_APRS_Tracker/tree/main).
 
+El siguiente paso es agregar código de control de los sensores, la idea es hacer lectura de cada uno, conectado a un pin distinto del ESP32 y obtener como salida un unico string como salida.\
+Este luego es agregado al paquete de APRS como mensaje.
