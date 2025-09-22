@@ -35,4 +35,4 @@ El presente proyecto propone el diseño e implementación de un sistema de monit
 El código base de control del tracker es el firmware libre establecido por Ricardo Guzman (richonguzman) [Aqui](https://github.com/richonguzman/LoRa_APRS_Tracker/tree/main).
 
 El siguiente paso es agregar código de control de los sensores, la idea es hacer lectura de cada uno, conectado a un pin distinto del ESP32 y obtener como salida un unico string como salida.\
-Este luego es agregado al paquete de APRS como mensaje.
+Este luego es agregado al paquete de APRS como "comment" al final de la trama del protocolo.
