@@ -36,5 +36,11 @@ El presente proyecto propone el diseño e implementación de un sistema de monit
 
 El código base de control del tracker es el firmware libre establecido por Ricardo Guzman (richonguzman) [Aqui](https://github.com/richonguzman/LoRa_APRS_Tracker/tree/main).
 
-El siguiente paso es agregar código de control de los sensores, la idea es hacer lectura de cada uno, conectado a un pin distinto del ESP32 y obtener como salida un unico string como salida.\
-Este luego es agregado al paquete de APRS como "comment" al final de la trama del protocolo.
+El siguiente paso es agregar código de control de los sensores, la idea es hacer lectura de cada uno, conectado a un pin distinto del ESP32 y obtener como salida un unico string como salida. Este luego es agregado al paquete de APRS como "comment" al final de la trama del protocolo. Paso a paso sigue:\
+
+1. Inicializar pines, sensores y modulo LoRa.
+2. Medir temperatura, nivel de agua y pH con sensores conectados a sus entradas digitales/analógicas (GPIO/ADC).
+3. Convertir cada lectura en dato tipo string.
+4. Concatenar los valores en un solo mensaje de telemetría.
+5. Empaquetar ese mensaje en el formato APRS al final de la trama, considerándose como un "comentario".
+6. Transmitirlo mediante un módulo LoRa hacia un gateway APRS a una frecuencia de 433.775 Mhz.
