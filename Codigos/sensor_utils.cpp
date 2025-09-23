@@ -11,7 +11,7 @@ namespace SENSORS_Utils {
         tempSensor.begin();
     }
 
-    // Lectura de temperatura (DS18B20).
+   // Lectura de temperatura (DS18B20).
     String readTemperature() {
         tempSensor.requestTemperatures();
         float tempC = tempSensor.getTempCByIndex(0);
@@ -29,13 +29,18 @@ namespace SENSORS_Utils {
         return "Nivel:" + String(percentage, 1) + "%";
     }
 
-    // Lectura de pH analógico.
-    String readPH() {
-        int rawValue = analogRead(PH_PIN);
+    // Lectura de turbidez analógico.
+    String readTurbidity() {
+        int rawValue = analogRead(TURB_PIN);
         // Conversión simplificada: mapear voltaje a rango de pH (0-14)
-        float voltage = (rawValue / 1023.0) * 5.0;  // Suponiendo Vref = 5V
-        float phValue = 3.5 * voltage;              // Factor típico aproximado
-        return "pH:" + String(phValue, 2);
+        float voltage = (rawValue / 4095.0) * 3.3;  // Suponiendo Vref = 3.3V
+        return "Turbidez:" + String(voltage, 2) + "V";
+    }
+
+    // Unir todas las lecturas en un solo String.
+    String getAllReadings() {
+        String data = readTemperature() + "; " + readWaterLevel() + "; " + readTurbidity();
+        return data;
     }
 
     // Unir todas las lecturas en un solo String.
