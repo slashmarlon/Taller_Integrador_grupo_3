@@ -43,10 +43,4 @@ namespace SENSORS_Utils {
         return data;
     }
 
-    // Unir todas las lecturas en un solo String.
-    String getAllReadings() {
-        String data = readTemperature() + "; " + readWaterLevel() + "; " + readPH();
-        return data;
-    }
-
 }
