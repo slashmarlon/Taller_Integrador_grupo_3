@@ -9,13 +9,13 @@ Gabriel Ignacio Miranda Lopez
 
 ## Resumen
 
-El presente proyecto propone el diseño e implementación de un sistema de monitoreo remoto para ecosistemas acuáticos, orientado a garantizar la adecuada calidad del agua y prevenir condiciones adversas que afecten la salud de sus peces. El sistema integra sensores de temperatura, pH y nivel de agua, conectados a un microcontrolador con módulo LoRa, encargado de adquirir, procesar y empaquetar los datos en formato APRS. Posteriormente, la información haciendo función de Tracker es transmitida mediante tecnología LoRa, que ofrece bajo consumo energético y gran alcance en la comunicación inalámbrica.
+El presente proyecto propone el diseño e implementación de un sistema de monitoreo remoto para ecosistemas acuáticos, orientado a garantizar la adecuada calidad del agua y prevenir condiciones adversas que afecten la salud de sus peces. El sistema integra sensores de temperatura, turbidez y nivel de agua, conectados a un microcontrolador con módulo LoRa, encargado de adquirir, procesar y empaquetar los datos en formato APRS. Posteriormente, la información haciendo función de Tracker es transmitida mediante tecnología LoRa, que ofrece bajo consumo energético y gran alcance en la comunicación inalámbrica.
 
 ## Objetivo general
-1. Diseñar e implementar un sistema de monitoreo remoto para peceras domésticas que integre sensores de temperatura, pH y nivel de agua, con comunicación de datos mediante protocolo LoRa-APRS.
+1. Diseñar e implementar un sistema de monitoreo remoto para peceras domésticas que integre sensores de temperatura, turbidez y nivel de agua, con comunicación de datos mediante protocolo LoRa-APRS.
 
 ## Objetivos especificos
-1. Integrar sensores de temperatura, pH y nivel de agua a un microcontrolador con módulo LoRa, para la adquisición continua de parámetros críticos de la pecera.
+1. Integrar sensores de temperatura, turbidez y nivel de agua a un microcontrolador con módulo LoRa, para la adquisición continua de parámetros críticos de la pecera.
 2. Desarrollar el firmware del modulo basado en LoRa-APRS, que permita enviar datos de telemetría de manera eficiente y confiable hacia un nodo receptor o gateway.
 3. Validar el funcionamiento del sistema en condiciones reales de operación, evaluando precisión de sensores, cobertura de transmisión y confiabilidad de la comunicación.
 
@@ -24,7 +24,7 @@ El presente proyecto propone el diseño e implementación de un sistema de monit
 - ESP32 TTGO T-Beam V1.2.
 - Sensor de temperatura digital tipo tubular DS18B20.
 - Sensor de nivel de agua MH analógico.
-- Sensor de pH analógico.
+- Sensor de turbidez analógico.
 - Sistema de alimentacion: Bateria recargable y/o panel solar.
 - Carcasa: Proteccion para agua y caídas.
 
