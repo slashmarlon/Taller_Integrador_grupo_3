@@ -1,0 +1,29 @@
+INICIO:
+    // --- Inicialización ---
+    Configurar pines de sensores.
+    Inicializar bus OneWire para sensor de temperatura.
+    Configurar entradas analógicas para nivel de agua y turbidez.
+    Inicializar módulo LoRa en frecuencia correspondiente.
+    Configurar parámetros APRS (callsign, path, etc.).
+
+LOOP_PRINCIPAL:
+    MIENTRAS sistema encendido HACER
+
+    // --- Adquisición de datos ---
+    tempC   ← leerTemperaturaDS18B20()
+    nivel   ← leerNivelAguaAnalogico(0–520) → convertir a porcentaje
+    TurbValue ← leerTurbidezAnalogico()
+
+    // --- Formar string de datos ---
+    datos ← "Temp:" + tempC + "C; " +
+             "Nivel:" + nivel + "%; " +
+             "Turb:" + TurbValue
+
+    // --- Construcción del paquete APRS ---
+    paqueteAPRS ← crearPaqueteAPRS(callsign, destino, ruta, posicion, datos)
+
+    // --- Transmisión por LoRa ---
+    enviarPorLoRa(paqueteAPRS)
+  
+    Entrar_Deep_Sleep(300000ms) // 5 minutos
+    GOTO LOOP_PRINCIPAL
