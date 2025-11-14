@@ -47,9 +47,9 @@ El siguiente paso es agregar código de control de los sensores, la idea es hace
 
 ## Resultados
 
-![aprs_fi_3](https://github.com/user-attachments/assets/83827a62-7137-4371-906c-f3ccd2a47ea3)
+<img width="1222" height="273" alt="image" src="https://github.com/user-attachments/assets/83827a62-7137-4371-906c-f3ccd2a47ea3" />
 
-![aprs_fi_4](https://github.com/user-attachments/assets/fd5d3554-f433-42c0-a590-64cb389f79c9)
+<img width="1222" height="273" alt="image" src="https://github.com/user-attachments/assets/fd5d3554-f433-42c0-a590-64cb389f79c9" />
 
-![aprs_fi_5](https://github.com/user-attachments/assets/98b33edd-3e3e-4a0e-9c2a-876f26df9bb1)
+<img width="1222" height="273" alt="image" src="https://github.com/user-attachments/assets/98b33edd-3e3e-4a0e-9c2a-876f26df9bb1" />
 
