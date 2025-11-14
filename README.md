@@ -32,6 +32,14 @@ El presente proyecto propone el diseño e implementación de un sistema de monit
 
 <img width="1222" height="273" alt="image" src="https://github.com/user-attachments/assets/7b5fdaaa-5dd2-4227-8c7f-71955ac1f349" />
 
+## Máquina de estados
+
+<img width="952" height="450" alt="image" src="https://github.com/user-attachments/assets/b1f98b5d-17e0-489e-8370-48cb0d509219" />
+
+## Diagrama de tercer nivel
+
+<img width="952" height="450" alt="image" src="https://github.com/user-attachments/assets/a9d826a2-f5dc-45d7-9c53-69feeafbd41c" />
+
 ## Firmware
 
 El código base de control del tracker es el firmware libre establecido por Ricardo Guzman (richonguzman) [Aqui](https://github.com/richonguzman/LoRa_APRS_Tracker/tree/main).
