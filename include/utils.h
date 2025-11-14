@@ -1,19 +1,22 @@
-/* Copyright (C) 2025 Ricardo Guzman - CA2RXU
- * 
- * This file is part of LoRa APRS Tracker.
- * 
- * LoRa APRS Tracker is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or 
- * (at your option) any later version.
- * 
- * LoRa APRS Tracker is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with LoRa APRS Tracker. If not, see <https://www.gnu.org/licenses/>.
+/* 
+Funciones variadas a utilizar:
+- char* getMaidenheadLocator(double lat, double lon, uint8_t size);
+Convierte la latitud y longitud en un locator Maidenhead.
+- String createDateString(time_t t);
+Genera un string con la fecha formateada.
+- String createTimeString(time_t t);
+Genera un string con la hora formateada.
+- void checkStatus();
+Revisa el estado general del dispositivo: GPS, LoRa, batería, sensores o flags internos 
+para actualizar indicadores o tomar decisiones.
+- void checkDisplayEcoMode();
+Controla el modo de ahorro de pantalla.
+- String getSmartBeaconState();
+Devuelve un texto que indica el estado actual del SmartBeaconing, como velocidad, 
+ajustes activos, o si está habilitado/deshabilitado.
+- void i2cScannerForPeripherals();
+Escanea el bus I2C para detectar qué periféricos están conectados (sensores, pantalla, etc.)
+y muestra las direcciones encontradas.
  */
 
 #ifndef UTILS_H_
