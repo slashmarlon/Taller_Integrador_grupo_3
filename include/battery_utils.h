@@ -1,4 +1,5 @@
 /*
+Funciones para medir e interpretar el nivel de batería, voltaje, porcentaje y estados de carga.
  */
 
 #ifndef BATTERY_UTILS_H_
