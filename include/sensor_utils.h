@@ -1,3 +1,7 @@
+/*
+Lectura y normalización de sensores adicionales (ej. temperatura, turbidez y nivel de agua).
+*/
+
 #ifndef SENSORS_UTILS_H_
 #define SENSORS_UTILS_H_
 
