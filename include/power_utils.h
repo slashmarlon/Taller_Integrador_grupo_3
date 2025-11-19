@@ -1,5 +1,6 @@
 /* 
 Control del consumo energético: modos de bajo consumo, apagado de periféricos, gestión de energía.
+LoRa, GPS y frecuencia de CPU.
  */
 
 #ifndef POWER_UTILS_H_
