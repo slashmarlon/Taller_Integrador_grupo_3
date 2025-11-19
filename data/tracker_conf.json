@@ -7,9 +7,11 @@
 			"overlay": "/",
 			"micE": "",
 			"comment": "Ingenieria Electronica - ITCR",
-			"smartBeaconActive": true,
+			"smartBeaconActive": false,
 			"smartBeaconSetting": 0,
-			"profileLabel": ""
+			"profileLabel": "Monitoreo Estatico",
+			"staticMode": true,
+			"staticBeaconInterval": 5
 		},
 		{
 			"callsign": "TI0tec3-7",
@@ -20,7 +22,9 @@
 			"comment": "Ingenieria Electronica - ITCR",
 			"smartBeaconActive": true,
 			"smartBeaconSetting": 2,
-			"profileLabel": ""
+			"profileLabel": "Monitoreo Movil",
+			"staticMode": false,
+			"staticBeaconInterval": 15
 		},
 		{
 			"callsign": "TI0tec3-7",
@@ -31,7 +35,9 @@
 			"comment": "Ingenieria Electronica - ITCR",
 			"smartBeaconActive": true,
 			"smartBeaconSetting": 1,
-			"profileLabel": ""
+			"profileLabel": "Monitoreo Movil",
+			"staticMode": false,
+			"staticBeaconInterval": 15
 		}
 	],
 	"display": {
@@ -41,20 +47,27 @@
 		"turn180" : false
     },
 	"battery": {
-		"sendVoltage": false,
+		"sendVoltage": true,
 		"voltageAsTelemetry": false,
 		"sendVoltageAlways": false,
-		"monitorVoltage": false,
-		"sleepVoltage": 2.9
+		"monitorVoltage": true,
+		"sleepVoltage": 3.2
+	},
+	"deepSleep": {
+		"enabled": true,
+		"sleepTimeMinutes": 0.1,
+		"tempThresholdHigh": 26.0,
+		"tempThresholdLow": 20.0,
+		"waterLevelThreshold": 10.0
 	},
 	"other": {
 		"simplifiedTrackerMode": false,
-		"sendCommentAfterXBeacons": 10,
+		"sendCommentAfterXBeacons": 1,
 		"path": "WIDE1-1",
 		"nonSmartBeaconRate": 15,
 		"rememberStationTime": 30,
 		"standingUpdateTime": 15,
-		"sendAltitude": true,
+		"sendAltitude": false,
 		"disableGPS": false,
 		"acceptOwnFrameFromTNC": false,
 		"email": ""
@@ -68,21 +81,21 @@
 		"temperatureCorrection": 0.0		
 	},
 	"notification": {
-		"ledTx": false,
+		"ledTx": true,
 		"ledTxPin": 13,
 		"ledMessage": false,
 		"ledMessagePin": 2,
 		"ledFlashlight": false,
 		"ledFlashlightPin": 14,
-		"buzzerActive": false,
+		"buzzerActive": true,
 		"buzzerPinTone": 33,
 		"buzzerPinVcc": 25,
-		"bootUpBeep": false,
-		"txBeep": false,
+		"bootUpBeep": true,
+		"txBeep": true,
 		"messageRxBeep": false,
 		"stationBeep": false,
-		"lowBatteryBeep": false,
-		"shutDownBeep": false
+		"lowBatteryBeep": true,
+		"shutDownBeep": true
 	},
 	"lora": [
 		{

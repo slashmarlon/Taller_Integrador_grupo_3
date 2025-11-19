@@ -14,6 +14,7 @@
 #include "lora_utils.h"
 #include "msg_utils.h"
 #include "gps_utils.h"
+#include "sensor_utils.h"
 #include "display.h"
 #include "utils.h"
 
@@ -22,7 +23,7 @@ HardwareSerial                      gpsSerial(1);
 TinyGPSPlus                         gps;
 
 
-String      versionDate             = "2025-09-29";
+String      versionDate             = "2025-11-18";
 
 uint8_t     myBeaconsIndex          = 0;
 int         myBeaconsSize           = Config.beacons.size();
@@ -83,6 +84,11 @@ void setup() {
     startupScreen(loraIndex, versionDate);
 
     MSG_Utils::loadNumMessages();
+    
+    // INICIALIZAR SENSORES (NUEVO)
+    SENSORS_Utils::initSensors();
+    Serial.println("[SETUP] Sensores inicializados");
+    
     GPS_Utils::setup();
     currentLoRaType = &Config.loraTypes[loraIndex];
     LoRa_Utils::setup();
@@ -103,6 +109,24 @@ void setup() {
 
     POWER_Utils::lowerCpuFrequency();
     logger.log(logging::LoggerLevel::LOGGER_LEVEL_DEBUG, "Main", "Smart Beacon is: %s", Utils::getSmartBeaconState());
+    
+    // MOSTRAR MODO DE OPERACIÓN
+    if (currentBeacon->staticMode) {
+        Serial.println("[SETUP] Modo ESTÁTICO activado (Monitoreo de Pecera)");
+        Serial.print("[SETUP] Intervalo de transmisión: ");
+        Serial.print(currentBeacon->staticBeaconInterval);
+        Serial.println(" minutos");
+        
+        if (Config.deepSleep.enabled) {
+            Serial.println("[SETUP] DeepSleep ACTIVADO");
+            Serial.print("[SETUP] Tiempo de sleep: ");
+            Serial.print(Config.deepSleep.sleepTimeMinutes);
+            Serial.println(" minutos");
+        }
+    } else {
+        Serial.println("[SETUP] Modo MÓVIL activado (GPS Tracking)");
+    }
+    
     logger.log(logging::LoggerLevel::LOGGER_LEVEL_INFO, "Main", "Setup Done!");
     menuDisplay = 0;
 }
@@ -143,37 +167,67 @@ void loop() {
     STATION_Utils::checkListenedStationsByTimeAndDelete();
 
     lastTx = millis() - lastTxTime;
-    if (gpsIsActive) {
-        GPS_Utils::getData();
-        bool gps_time_update = gps.time.isUpdated();
-        bool gps_loc_update  = gps.location.isUpdated();
-        GPS_Utils::setDateFromData();
-
-        int currentSpeed = (int) gps.speed.kmph();
-
-        if (gps_loc_update) Utils::checkStatus();
-
-        if (!sendUpdate && gps_loc_update && smartBeaconActive) {
-            GPS_Utils::calculateDistanceTraveled();
-            if (!sendUpdate) GPS_Utils::calculateHeadingDelta(currentSpeed);
-            STATION_Utils::checkStandingUpdateTime();
+    
+    // ============================================
+    // NUEVO: VERIFICAR SI ESTÁ EN MODO ESTÁTICO
+    // ============================================
+    if (currentBeacon->staticMode) {
+        // MODO ESTÁTICO (PECERA FIJA)
+        
+        // Verificar si debe transmitir (intervalo o umbrales críticos)
+        SMARTBEACON_Utils::checkStaticMode();
+        
+        // Si debe transmitir, enviar beacon
+        if (sendUpdate) {
+            STATION_Utils::sendBeacon();
+            
+            // Después de transmitir, verificar si debe entrar en DeepSleep
+            SLEEP_Utils::checkAndEnterDeepSleep();
+            // NOTA: Si DeepSleep está habilitado, el código NO continúa después de esta línea
+            //       El ESP32 se reinicia cuando despierta
         }
-        SMARTBEACON_Utils::checkFixedBeaconTime();
-        if (sendUpdate && gps_loc_update) STATION_Utils::sendBeacon();
-        if (gps_time_update) SMARTBEACON_Utils::checkInterval(currentSpeed);
-
-        if (millis() - refreshDisplayTime >= 1000 || gps_time_update) {
-            GPS_Utils::checkStartUpFrames();
-            refreshDisplayTime = millis();
-        }
-        SLEEP_Utils::checkIfGPSShouldSleep();
-    } else {
-        if (millis() - lastGPSTime > txInterval) {
-            SLEEP_Utils::gpsWakeUp();
-        }
-        STATION_Utils::checkStandingUpdateTime();
+        
+        // Actualizar display cada segundo
         if (millis() - refreshDisplayTime >= 1000) {
             refreshDisplayTime = millis();
+            // Aquí se podría mostrar info de sensores en el display
+        }
+        
+    } else {
+        // MODO MÓVIL ORIGINAL (GPS TRACKING)
+        
+        if (gpsIsActive) {
+            GPS_Utils::getData();
+            bool gps_time_update = gps.time.isUpdated();
+            bool gps_loc_update  = gps.location.isUpdated();
+            GPS_Utils::setDateFromData();
+
+            int currentSpeed = (int) gps.speed.kmph();
+
+            if (gps_loc_update) Utils::checkStatus();
+
+            if (!sendUpdate && gps_loc_update && smartBeaconActive) {
+                GPS_Utils::calculateDistanceTraveled();
+                if (!sendUpdate) GPS_Utils::calculateHeadingDelta(currentSpeed);
+                STATION_Utils::checkStandingUpdateTime();
+            }
+            SMARTBEACON_Utils::checkFixedBeaconTime();
+            if (sendUpdate && gps_loc_update) STATION_Utils::sendBeacon();
+            if (gps_time_update) SMARTBEACON_Utils::checkInterval(currentSpeed);
+
+            if (millis() - refreshDisplayTime >= 1000 || gps_time_update) {
+                GPS_Utils::checkStartUpFrames();
+                refreshDisplayTime = millis();
+            }
+            SLEEP_Utils::checkIfGPSShouldSleep();
+        } else {
+            if (millis() - lastGPSTime > txInterval) {
+                SLEEP_Utils::gpsWakeUp();
+            }
+            STATION_Utils::checkStandingUpdateTime();
+            if (millis() - refreshDisplayTime >= 1000) {
+                refreshDisplayTime = millis();
+            }
         }
     }
 }

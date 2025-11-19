@@ -27,6 +27,9 @@ public:
     String  micE;
     bool    gpsEcoMode;
     String  profileLabel;
+    // NUEVOS PARÁMETROS PARA MODO ESTÁTICO
+    bool    staticMode;              // true = pecera fija, false = móvil GPS
+    int     staticBeaconInterval;    // Minutos entre transmisiones en modo estático
 };
 
 class Display {
@@ -103,6 +106,16 @@ public:
     bool    useKISS;
 };
 
+// NUEVA CLASE PARA DEEPSLEEP
+class DeepSleep {
+public:
+    bool    enabled;                 // Activar/desactivar DeepSleep
+    int     sleepTimeMinutes;        // Minutos de sleep (predeterminado: 5)
+    float   tempThresholdHigh;       // °C para alerta alta (predeterminado: 30.0)
+    float   tempThresholdLow;        // °C para alerta baja (predeterminado: 18.0)
+    float   waterLevelThreshold;     // % mínimo de agua (predeterminado: 30.0)
+};
+
 
 class Configuration {
 public:
@@ -117,6 +130,7 @@ public:
     std::vector<LoraType>   loraTypes;
     PTT                     ptt;
     BLUETOOTH               bluetooth;
+    DeepSleep               deepSleep;  // NUEVO: Configuración de DeepSleep
     
     bool    simplifiedTrackerMode;
     int     sendCommentAfterXBeacons;

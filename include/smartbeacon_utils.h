@@ -1,5 +1,6 @@
 /* 
 Lógica SmartBeaconing: determina cuándo enviar tramas APRS según velocidad, dirección y movimiento.
+ACTUALIZADO: Incluye modo estático para monitoreo de peceras sin GPS.
  */
 
 #ifndef SMARTBEACON_UTILS_H_
@@ -25,6 +26,10 @@ namespace SMARTBEACON_Utils {
     void checkInterval(int speed);
     void checkFixedBeaconTime();
     void checkState();
+    
+    // NUEVAS FUNCIONES PARA MODO ESTÁTICO
+    void checkStaticMode();              // Verifica si debe transmitir en modo estático
+    bool checkSensorThresholds();        // Verifica umbrales críticos de sensores
     
 }
 
