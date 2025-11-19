@@ -12,7 +12,7 @@ void Configuration::writeFile() {
 
     Serial.println("Saving config..");
 
-    StaticJsonDocument<2800> data;
+    StaticJsonDocument<3200> data;
     File configFile = SPIFFS.open("/tracker_conf.json", "w");
 
     data["wifiAP"]["active"]                    = wifiAP.active;
@@ -28,6 +28,8 @@ void Configuration::writeFile() {
         data["beacons"][i]["micE"]                  = beacons[i].micE;
         data["beacons"][i]["gpsEcoMode"]            = beacons[i].gpsEcoMode;
         data["beacons"][i]["profileLabel"]          = beacons[i].profileLabel;
+        data["beacons"][i]["staticMode"]            = beacons[i].staticMode;
+        data["beacons"][i]["staticBeaconInterval"]  = beacons[i].staticBeaconInterval;
     }
 
     data["display"]["showSymbol"]               = display.showSymbol;
@@ -40,6 +42,12 @@ void Configuration::writeFile() {
     data["battery"]["sendVoltageAlways"]        = battery.sendVoltageAlways;
     data["battery"]["monitorVoltage"]           = battery.monitorVoltage;
     data["battery"]["sleepVoltage"]             = battery.sleepVoltage;
+
+    data["deepSleep"]["enabled"]                = deepSleep.enabled;
+    data["deepSleep"]["sleepTimeMinutes"]       = deepSleep.sleepTimeMinutes;
+    data["deepSleep"]["tempThresholdHigh"]      = deepSleep.tempThresholdHigh;
+    data["deepSleep"]["tempThresholdLow"]       = deepSleep.tempThresholdLow;
+    data["deepSleep"]["waterLevelThreshold"]    = deepSleep.waterLevelThreshold;
 
     data["winlink"]["password"]                 = winlink.password;
 
@@ -82,7 +90,7 @@ void Configuration::writeFile() {
     #ifdef HAS_BT_CLASSIC
         data["bluetooth"]["useBLE"]             = bluetooth.useBLE;
     #else
-        data["bluetooth"]["useBLE"]             = true; // fixed as BLE        
+        data["bluetooth"]["useBLE"]             = true;
     #endif
     data["bluetooth"]["useKISS"]                = bluetooth.useKISS;
 
@@ -108,7 +116,7 @@ bool Configuration::readFile() {
     File configFile = SPIFFS.open("/tracker_conf.json", "r");
 
     if (configFile) {
-        StaticJsonDocument<2800> data;
+        StaticJsonDocument<3200> data;
         DeserializationError error = deserializeJson(data, configFile);
         if (error) {
             Serial.println("Failed to read file, using default configuration");
@@ -131,6 +139,8 @@ bool Configuration::readFile() {
             bcn.micE                    = BeaconsArray[i]["micE"] | "";
             bcn.gpsEcoMode              = BeaconsArray[i]["gpsEcoMode"] | false;
             bcn.profileLabel            = BeaconsArray[i]["profileLabel"] | "";
+            bcn.staticMode              = BeaconsArray[i]["staticMode"] | false;
+            bcn.staticBeaconInterval    = BeaconsArray[i]["staticBeaconInterval"] | 5;
             
             beacons.push_back(bcn);
         }
@@ -145,6 +155,12 @@ bool Configuration::readFile() {
         battery.sendVoltageAlways       = data["battery"]["sendVoltageAlways"] | false;
         battery.monitorVoltage          = data["battery"]["monitorVoltage"] | false;
         battery.sleepVoltage            = data["battery"]["sleepVoltage"] | 2.9;
+
+        deepSleep.enabled               = data["deepSleep"]["enabled"] | false;
+        deepSleep.sleepTimeMinutes      = data["deepSleep"]["sleepTimeMinutes"] | 5;
+        deepSleep.tempThresholdHigh     = data["deepSleep"]["tempThresholdHigh"] | 30.0;
+        deepSleep.tempThresholdLow      = data["deepSleep"]["tempThresholdLow"] | 18.0;
+        deepSleep.waterLevelThreshold   = data["deepSleep"]["waterLevelThreshold"] | 30.0;
 
         winlink.password                = data["winlink"]["password"] | "NOPASS";
 
@@ -192,8 +208,8 @@ bool Configuration::readFile() {
             bluetooth.useBLE            = data["bluetooth"]["useBLE"] | false;
             bluetooth.useKISS           = data["bluetooth"]["useKISS"] | false;
         #else
-            bluetooth.useBLE            = true;    // fixed as BLE
-            bluetooth.useKISS           = data["bluetooth"]["useKISS"] | true;    // true=KISS,  false=TNC2            
+            bluetooth.useBLE            = true;
+            bluetooth.useKISS           = data["bluetooth"]["useKISS"] | true;
         #endif
 
         simplifiedTrackerMode           = data["other"]["simplifiedTrackerMode"] | false;
@@ -253,6 +269,8 @@ void Configuration::init() {
         beacon.micE                 = "";
         beacon.gpsEcoMode           = false;
         beacon.profileLabel         = "";
+        beacon.staticMode           = false;
+        beacon.staticBeaconInterval = 5;
         beacons.push_back(beacon);
     }
 
@@ -266,6 +284,12 @@ void Configuration::init() {
     battery.sendVoltageAlways       = false;
     battery.monitorVoltage          = false;
     battery.sleepVoltage            = 2.9;
+
+    deepSleep.enabled               = false;
+    deepSleep.sleepTimeMinutes      = 5;
+    deepSleep.tempThresholdHigh     = 30.0;
+    deepSleep.tempThresholdLow      = 18.0;
+    deepSleep.waterLevelThreshold   = 30.0;
 
     winlink.password                = "NOPASS";
 
@@ -325,7 +349,7 @@ void Configuration::init() {
         bluetooth.useBLE            = false;
         bluetooth.useKISS           = false;
     #else
-        bluetooth.useBLE            = true;    // fixed as BLE
+        bluetooth.useBLE            = true;
         bluetooth.useKISS           = true;
     #endif
     
