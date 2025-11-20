@@ -1,3 +1,8 @@
+/*
+Módulo principal para el control general del Hardware, todos los módulos aplicados son
+aplicados aquí.
+*/
+
 #include <APRSPacketLib.h>
 #include <TinyGPS++.h>
 #include <Arduino.h>
@@ -12,6 +17,7 @@
 #include "power_utils.h"
 #include "sleep_utils.h"
 #include "lora_utils.h"
+#include "menu_utils.h"
 #include "msg_utils.h"
 #include "gps_utils.h"
 #include "sensor_utils.h"
@@ -109,6 +115,9 @@ void setup() {
 
     POWER_Utils::lowerCpuFrequency();
     logger.log(logging::LoggerLevel::LOGGER_LEVEL_DEBUG, "Main", "Smart Beacon is: %s", Utils::getSmartBeaconState());
+    logger.log(logging::LoggerLevel::LOGGER_LEVEL_INFO, "Main", "Setup Done!");
+
+    menuDisplay = 0;
     
     // MOSTRAR MODO DE OPERACIÓN
     if (currentBeacon->staticMode) {
@@ -217,6 +226,7 @@ void loop() {
 
             if (millis() - refreshDisplayTime >= 1000 || gps_time_update) {
                 GPS_Utils::checkStartUpFrames();
+                MENU_Utils::showOnScreen();
                 refreshDisplayTime = millis();
             }
             SLEEP_Utils::checkIfGPSShouldSleep();
@@ -226,6 +236,7 @@ void loop() {
             }
             STATION_Utils::checkStandingUpdateTime();
             if (millis() - refreshDisplayTime >= 1000) {
+                MENU_Utils::showOnScreen();
                 refreshDisplayTime = millis();
             }
         }
