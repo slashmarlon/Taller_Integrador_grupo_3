@@ -1,6 +1,3 @@
-/*
-Manejo de los menús del firmware que se observan en el display del hardware.
-*/
 #include <APRSPacketLib.h>
 #include <TinyGPS++.h>
 #include <vector>
