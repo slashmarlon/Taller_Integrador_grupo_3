@@ -101,14 +101,39 @@ Se actualizó `configuration.cpp/h` y `tracker_conf.json`:
 
 ## Resultados
 
+Inicialmente se tiene la comprobación de la correcta conexión y envio de datos del tracker mediante protocolo LoRa APRS validada mediante el seguimiento en el sitio web aprs.fi
+
 <img width="240" height="297" alt="image" src="https://github.com/user-attachments/assets/83827a62-7137-4371-906c-f3ccd2a47ea3" />
 
 <img width="240" height="246" alt="image" src="https://github.com/user-attachments/assets/fd5d3554-f433-42c0-a590-64cb389f79c9" />
 
 <img width="240" height="241" alt="image" src="https://github.com/user-attachments/assets/98b33edd-3e3e-4a0e-9c2a-876f26df9bb1" />
 
+Luego, se muestra un ejemplo de implementación del sistema para el monitoreo de ecosistemas acuáticos con ambos sensores integrados.
 <img width="240" height="241" alt="image" src="https://github.com/user-attachments/assets/ca4e1870-7ceb-441d-b962-dbfc44508834" />
+
+Por último, se muestra el módulo enviando datos y realizando mediciones
 <img width="240" height="241" alt="image" src="https://github.com/user-attachments/assets/71e15f6b-6eef-4ede-a6e6-9f9ecc2c0b78" />
+
+## Limitaciones 
+Escasez de disponibilidad inmediata de sensores de PH y Turbidez accesibles: Se pudo observar una escasez en la disponibilidad de sensores medidores de PH accesibles en el periodo necesario para desarrollar el proyecto, se buscaron soluciones, no obstante, las de disponibilidad inmediata se salían del presupuesto con mucha diferencia o los plazos de entrega se excedía del período de realización del proyecto.
+Resistencia y calidad de sensores: para una implementación real se debe de buscar sensores de alto nivel con resistencia IP67 debido a que los mismos deben de estar sumergidos en el ambiente acuático por tiempos prolongados y expuestos a climas adversos
+Dificultades para conectar el dispositivo al igate: se logró la conexión con el igate del ITCR, no obstante desde ubicaciones como Heredia o Tierra Blanca de Cartago no fue posible conectar el dispositivo a algún igate cercano, además en interiores demostró dificultades para mantener una conexión y envío de datos activa
+
+## Conclusiones
+
+-Se logró implementar un prototipo de un sistema de monitoreo remoto para ecosistemas acuáticos con comunicación de datos mediante el protocolo LoRa-APRS
+-Se lograron integrar dos de los tres sensores propuestos de manera funcional enviando datos al ESP32, en específico el sensor de nivel y el de temperatura
+-Se desarrolló un firmware correcto para el envío de telemetría, no obstante, parte de las limitaciones del proyecto fue la dificultad para conectarse al igate y poder ver los datos enviados
+-Se validó el funcionamiento del sistema mediante el tracking web y la medición de los sensores implementados
+            
+## Recomendaciones 
+
+-Se logró implementar un prototipo de un sistema de monitoreo remoto para ecosistemas acuáticos con comunicación de datos mediante el protocolo LoRa-APRS
+-Se lograron integrar dos de los tres sensores propuestos de manera funcional enviando datos al ESP32
+-Se desarrolló un firmware correcto para el envío de telemetría 
+-Se validó el funcionamiento del sistema mediante el tracking web y la medición de los sensores implementados
+
 
 
 
