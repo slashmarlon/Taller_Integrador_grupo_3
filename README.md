@@ -107,6 +107,8 @@ Se actualizó `configuration.cpp/h` y `tracker_conf.json`:
 
 <img width="240" height="241" alt="image" src="https://github.com/user-attachments/assets/98b33edd-3e3e-4a0e-9c2a-876f26df9bb1" />
 
+<img width="240" height="241" alt="image" src="https://github.com/user-attachments/assets/ca4e1870-7ceb-441d-b962-dbfc44508834" />
+<img width="240" height="241" alt="image" src="https://github.com/user-attachments/assets/71e15f6b-6eef-4ede-a6e6-9f9ecc2c0b78" />
 
 
 
