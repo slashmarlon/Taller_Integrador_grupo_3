@@ -1,5 +1,5 @@
 /*
-
+Manejo de los menús del firmware que se observan en el display del hardware.
 */
 
 #ifndef MENU_UTILS_H_
