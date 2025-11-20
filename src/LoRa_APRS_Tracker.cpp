@@ -1,3 +1,8 @@
+/*
+Módulo principal para el control general del Hardware, todos los módulos aplicados son
+aplicados aquí.
+*/
+
 #include <APRSPacketLib.h>
 #include <TinyGPS++.h>
 #include <Arduino.h>
@@ -12,6 +17,7 @@
 #include "power_utils.h"
 #include "sleep_utils.h"
 #include "lora_utils.h"
+#include "menu_utils.h"
 #include "msg_utils.h"
 #include "gps_utils.h"
 #include "sensor_utils.h"
