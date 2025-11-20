@@ -115,6 +115,9 @@ void setup() {
 
     POWER_Utils::lowerCpuFrequency();
     logger.log(logging::LoggerLevel::LOGGER_LEVEL_DEBUG, "Main", "Smart Beacon is: %s", Utils::getSmartBeaconState());
+    logger.log(logging::LoggerLevel::LOGGER_LEVEL_INFO, "Main", "Setup Done!");
+
+    menuDisplay = 0;
     
     // MOSTRAR MODO DE OPERACIÓN
     if (currentBeacon->staticMode) {
@@ -223,6 +226,7 @@ void loop() {
 
             if (millis() - refreshDisplayTime >= 1000 || gps_time_update) {
                 GPS_Utils::checkStartUpFrames();
+                MENU_Utils::showOnScreen();
                 refreshDisplayTime = millis();
             }
             SLEEP_Utils::checkIfGPSShouldSleep();
@@ -232,6 +236,7 @@ void loop() {
             }
             STATION_Utils::checkStandingUpdateTime();
             if (millis() - refreshDisplayTime >= 1000) {
+                MENU_Utils::showOnScreen();
                 refreshDisplayTime = millis();
             }
         }
