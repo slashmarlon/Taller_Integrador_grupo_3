@@ -40,18 +40,63 @@ El presente proyecto propone el diseño e implementación de un sistema de monit
 
 <img width="952" height="450" alt="image" src="https://github.com/user-attachments/assets/a9d826a2-f5dc-45d7-9c53-69feeafbd41c" />
 
+### Diagrama de Flujo de Datos
+
+![Flujo de Datos](Flujo_datos.PNG)
+
 ## Firmware
 
 El código base de control del tracker es el firmware libre establecido por Ricardo Guzman (richonguzman) [Aqui](https://github.com/richonguzman/LoRa_APRS_Tracker/tree/main).
 
-El siguiente paso es agregar código de control de los sensores, la idea es hacer lectura de cada uno, conectado a un pin distinto del ESP32 y obtener como salida un unico string como salida. Este luego es agregado al paquete de APRS como "comment" al final de la trama del protocolo. Paso a paso sigue:\
+### Modificaciones Implementadas
 
-1. Inicializar pines, sensores y modulo LoRa.
-2. Medir temperatura, nivel de agua y pH con sensores conectados a sus entradas digitales/analógicas (GPIO/ADC).
-3. Convertir cada lectura en dato tipo string.
-4. Concatenar los valores en un solo mensaje de telemetría.
-5. Empaquetar ese mensaje en el formato APRS al final de la trama, considerándose como un "comentario".
-6. Transmitirlo mediante un módulo LoRa hacia un gateway APRS a una frecuencia de 433.775 Mhz.
+#### 1. Integración de Sensores
+Se agregó el módulo `sensor_utils.cpp/h` con las siguientes funcionalidades:
+- Lectura de temperatura mediante sensor DS18B20 (OneWire)
+- Lectura de nivel de agua mediante ADC analógico (GPIO33)
+- Control de alimentación mediante GPIOs (25, 26) para ahorro energético
+- Validación de lecturas y manejo de errores
+- Concatenación de datos en formato string para transmisión
+
+**Pines utilizados:**
+- GPIO32: Datos DS18B20 (temperatura)
+- GPIO33: ADC nivel de agua
+- GPIO25: Control alimentación sensor turbidez (reservado)
+- GPIO26: Control alimentación sensor nivel
+
+#### 2. Modo Estático con SmartBeaconing Adaptado
+Se modificó `smartbeacon_utils.cpp` para soportar operación estática:
+- **Modo Estático**: Intervalos fijos de transmisión (configurable, por defecto 5 minutos)
+- **Transmisión por Umbrales**: TX inmediata si se detectan condiciones críticas:
+  - Temperatura alta: > 30°C
+  - Temperatura baja: < 18°C
+  - Nivel de agua bajo: < 30%
+- Deshabilitación de cálculos GPS innecesarios en modo estático
+
+#### 3. DeepSleep ESP32
+Se implementó `sleep_utils.cpp` con gestión completa de DeepSleep:
+- **Preparación**: Apagado de sensores y GPS antes de dormir
+- **Timer Wake Up**: Despertar automático cada X minutos (configurable)
+- **Ahorro Energético**: Consumo reducido de 240mA a 0.01mA en sleep
+- **Autonomía**: ~15-30 días con batería de 2500mAh
+
+#### 4. Configuración Extendida
+Se actualizó `configuration.cpp/h` y `tracker_conf.json`:
+```json
+{
+  "beacons": [{
+    "staticMode": true,
+    "staticBeaconInterval": 5
+  }],
+  "deepSleep": {
+    "enabled": true,
+    "sleepTimeMinutes": 5,
+    "tempThresholdHigh": 30.0,
+    "tempThresholdLow": 18.0,
+    "waterLevelThreshold": 30.0
+  }
+}
+```
 
 ## Resultados
 
@@ -60,4 +105,11 @@ El siguiente paso es agregar código de control de los sensores, la idea es hace
 <img width="240" height="246" alt="image" src="https://github.com/user-attachments/assets/fd5d3554-f433-42c0-a590-64cb389f79c9" />
 
 <img width="240" height="241" alt="image" src="https://github.com/user-attachments/assets/98b33edd-3e3e-4a0e-9c2a-876f26df9bb1" />
+
+
+
+
+
+
+
 
