@@ -42,7 +42,8 @@ El presente proyecto propone el diseño e implementación de un sistema de monit
 
 ### Diagrama de Flujo de Datos
 
-![Flujo de Datos](Flujo_datos.PNG)
+<img width="4750" height="900" alt="Flujo de Datos" src="Flujo_datos.PNG" />
+
 
 ## Firmware
 
