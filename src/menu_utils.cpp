@@ -11,7 +11,6 @@
 #include "menu_utils.h"
 #include "msg_utils.h"
 #include "gps_utils.h"
-#include "wx_utils.h"
 #include "display.h"
 #include "utils.h"
 
@@ -776,9 +775,7 @@ namespace MENU_Utils {
                     fourthRowMainMenu += fourthRowSpeed;
                     fourthRowMainMenu += "km/h  ";
                     fourthRowMainMenu += fourthRowCourse;
-                    if (Config.telemetry.active && (time_now % 10 < 5) && wxModuleType != 0) {
-                        fourthRowMainMenu = WX_Utils::readDataSensor(1);
-                    }
+                    
                     if (MSG_Utils::getNumWLNKMails() > 0) {
                         fourthRowMainMenu = "** WLNK MAIL: ";
                         fourthRowMainMenu += String(MSG_Utils::getNumWLNKMails());
