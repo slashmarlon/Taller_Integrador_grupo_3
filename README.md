@@ -103,17 +103,17 @@ Se actualizó `configuration.cpp/h` y `tracker_conf.json`:
 
 Inicialmente se tiene la comprobación de la correcta conexión y envio de datos del tracker mediante protocolo LoRa APRS validada mediante el seguimiento en el sitio web aprs.fi
 
-<img width="240" height="297" alt="image" src="https://github.com/user-attachments/assets/83827a62-7137-4371-906c-f3ccd2a47ea3" />
+<img width="800" height="346" alt="image" src="https://github.com/user-attachments/assets/83827a62-7137-4371-906c-f3ccd2a47ea3" />
 
-<img width="240" height="246" alt="image" src="https://github.com/user-attachments/assets/fd5d3554-f433-42c0-a590-64cb389f79c9" />
+<img width="800" height="321" alt="image" src="https://github.com/user-attachments/assets/fd5d3554-f433-42c0-a590-64cb389f79c9" />
 
-<img width="240" height="241" alt="image" src="https://github.com/user-attachments/assets/98b33edd-3e3e-4a0e-9c2a-876f26df9bb1" />
+<img width="800" height="290" alt="image" src="https://github.com/user-attachments/assets/98b33edd-3e3e-4a0e-9c2a-876f26df9bb1" />
 
 Luego, se muestra un ejemplo de implementación del sistema para el monitoreo de ecosistemas acuáticos con ambos sensores integrados.
-<img width="240" height="241" alt="image" src="https://github.com/user-attachments/assets/ca4e1870-7ceb-441d-b962-dbfc44508834" />
+<img width="800" height="241" alt="image" src="https://github.com/user-attachments/assets/ca4e1870-7ceb-441d-b962-dbfc44508834" />
 
 Por último, se muestra el módulo enviando datos y realizando mediciones
-<img width="240" height="241" alt="image" src="https://github.com/user-attachments/assets/71e15f6b-6eef-4ede-a6e6-9f9ecc2c0b78" />
+<img width="800" height="241" alt="image" src="https://github.com/user-attachments/assets/71e15f6b-6eef-4ede-a6e6-9f9ecc2c0b78" />
 
 ## Limitaciones 
 Escasez de disponibilidad inmediata de sensores de PH y Turbidez accesibles: Se pudo observar una escasez en la disponibilidad de sensores medidores de PH accesibles en el periodo necesario para desarrollar el proyecto, se buscaron soluciones, no obstante, las de disponibilidad inmediata se salían del presupuesto con mucha diferencia o los plazos de entrega se excedía del período de realización del proyecto.
